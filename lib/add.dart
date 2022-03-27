@@ -1,36 +1,18 @@
-import 'package:counter_app/main.dart';
-import 'package:counter_app/todo.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todo_app_2/providers.dart';
+import 'package:todo_app_2/todo.dart';
 
-class AddPage extends StatefulWidget {
-  const AddPage({ Key? key}) : super(key: key);
-
-  @override
-  State<AddPage> createState() => _AddPageState();
-}
-
-class _AddPageState extends State<AddPage> {
-  late TextEditingController _headerController;
-  late TextEditingController _descriptionController;
-  @override
-  void initState() {
-    _headerController = TextEditingController();
-    _descriptionController = TextEditingController();
-    super.initState();
-  }
+class AddTodo extends ConsumerWidget {
+  AddTodo({ Key? key }) : super(key: key);
+  final TextEditingController _headerController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
 
   @override
-  void dispose() {
-    _headerController.dispose();
-    _descriptionController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
-        title:const Text('Edit To Do Page'),
+        title: const Text('Add New To Do'),
       ),
       body: Column(
         children: [
@@ -50,22 +32,21 @@ class _AddPageState extends State<AddPage> {
             children: [
               ElevatedButton(
                 onPressed: (){
-                  Navigator.pop(context, TodoItem(
-                    header: _headerController.text, 
-                    description: _descriptionController.text
-                  ));
-                }, 
+                
+                    ref.read(todoItemListController.notifier).addTodo(_headerController.text, _descriptionController.text);
+                    Navigator.pop(context);
+                
+              }, 
                 child: const Text('Add To Do'),
               ),
 
               ElevatedButton(
                 onPressed: (){
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> const ToDoApp()));
+                  Navigator.pop(context);
                 }, 
                 child: const Text('Cancel')
-              )
-            ],
-          )
+              )]
+            )
         ],
       ),
     );

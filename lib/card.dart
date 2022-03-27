@@ -1,5 +1,5 @@
-import 'package:counter_app/todo.dart';
 import 'package:flutter/material.dart';
+import 'package:todo_app_2/todo.dart';
 
 Widget buildListTitle(TodoItem item){
   return Card(
