@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo_app_2/providers.dart';
-import 'package:todo_app_2/todo.dart';
+import 'package:counter_app/providers.dart';
+import 'package:counter_app/todo.dart';
 
 class AddTodo extends ConsumerWidget {
   AddTodo({ Key? key }) : super(key: key);
@@ -32,10 +32,13 @@ class AddTodo extends ConsumerWidget {
             children: [
               ElevatedButton(
                 onPressed: (){
-                
-                    ref.read(todoItemListController.notifier).addTodo(_headerController.text, _descriptionController.text);
-                    Navigator.pop(context);
-                
+                  ref.read(todoItemListController.notifier).addTodo(
+                        TodoItem(
+                          _headerController.text,
+                          _descriptionController.text
+                        )
+                      );
+                Navigator.pop(context);
               }, 
                 child: const Text('Add To Do'),
               ),

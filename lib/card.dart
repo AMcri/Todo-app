@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app_2/todo.dart';
+import 'package:counter_app/todo.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 Widget buildListTitle(TodoItem item){
   return Card(
